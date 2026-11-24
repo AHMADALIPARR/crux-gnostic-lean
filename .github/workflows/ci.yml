@@ -37,3 +37,96 @@ jobs:
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
       - name: lake build
         run: lake build
+
+  zig:
+    name: CRUX compiler (Zig 0.17.1)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: zig
+    env:
+      ZIG_VERSION: 0.17.1
+      ZIG_SHA256: 3581863e3cbcfd0fce0efc682ce7e9e93da96668a977791d356a26d2a7e9b17a
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Zig
+        run: |
+          curl -sSfL -o "$RUNNER_TEMP/zig.tar.xz" "https://ziglang.org/download/$ZIG_VERSION/zig-x86_64-linux-$ZIG_VERSION.tar.xz"
+          echo "$ZIG_SHA256  $RUNNER_TEMP/zig.tar.xz" | sha256sum -c -
+          tar -xJf "$RUNNER_TEMP/zig.tar.xz" -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/zig-x86_64-linux-$ZIG_VERSION" >> "$GITHUB_PATH"
+      - name: Install z3
+        run: sudo apt-get update && sudo apt-get install -y z3
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: zig fmt --check
+        run: zig fmt --check build.zig src
+      - name: zig build
+        run: zig build
+      - name: zig build test
+        run: zig build test --summary all
+      - name: Examples through every subcommand
+        run: |
+          for f in examples/*.crux; do
+            for c in lex parse lower emit-smt emit-lean emit-sas emit-cuda cert run solve; do
+              ./zig-out/bin/crux "$c" --no-z3 "$f" > /dev/null
+            done
+            ./zig-out/bin/crux check "$f"
+          done
+      - name: SMT-LIB output through z3
+        run: |
+          for f in examples/*.crux; do
+            ./zig-out/bin/crux emit-smt "$f" -o "$RUNNER_TEMP/out.smt2"
+            z3 -smt2 "$RUNNER_TEMP/out.smt2" | tee "$RUNNER_TEMP/z3.txt"
+            grep -qE '^(sat|unsat)$' "$RUNNER_TEMP/z3.txt"
+            if grep -v 'model is not available' "$RUNNER_TEMP/z3.txt" | grep -q '^(error'; then exit 1; fi
+          done
+      - name: Lean output through Lean 4.19.0
+        run: |
+          ./zig-out/bin/crux emit-lean examples/basics.crux -o "$RUNNER_TEMP/basics.lean"
+          lean +leanprover/lean4:v4.19.0 "$RUNNER_TEMP/basics.lean"
+      - name: CUDA output, host build
+        run: |
+          for f in examples/*.crux; do
+            ./zig-out/bin/crux emit-cuda "$f" -o "$RUNNER_TEMP/out.cpp"
+            g++ -std=c++17 -Wall -Werror -O2 "$RUNNER_TEMP/out.cpp" -o "$RUNNER_TEMP/out"
+            "$RUNNER_TEMP/out" | sed 's/ after.*//' > "$RUNNER_TEMP/cuda.txt"
+            ./zig-out/bin/crux emit-sas "$f" | awk '/^query/{q=$2} /result:/{print "query " q ": " $2}' > "$RUNNER_TEMP/sas.txt"
+            diff "$RUNNER_TEMP/cuda.txt" "$RUNNER_TEMP/sas.txt"
+          done
+
+  nim:
+    name: Nim bindings (Nim 2.4.2)
+    runs-on: ubuntu-latest
+    env:
+      ZIG_VERSION: 0.17.1
+      ZIG_SHA256: 3581863e3cbcfd0fce0efc682ce7e9e93da96668a977791d356a26d2a7e9b17a
+      NIM_VERSION: 2.4.2
+      NIM_SHA256: 0ee5b16e81852a956d4fddb4aa44b5958c645c992132fa43be45f489573ee325
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Zig and Nim
+        run: |
+          curl -sSfL -o "$RUNNER_TEMP/zig.tar.xz" "https://ziglang.org/download/$ZIG_VERSION/zig-x86_64-linux-$ZIG_VERSION.tar.xz"
+          echo "$ZIG_SHA256  $RUNNER_TEMP/zig.tar.xz" | sha256sum -c -
+          tar -xJf "$RUNNER_TEMP/zig.tar.xz" -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/zig-x86_64-linux-$ZIG_VERSION" >> "$GITHUB_PATH"
+          curl -sSfL -o "$RUNNER_TEMP/nim.tar.xz" "https://nim-lang.org/download/nim-$NIM_VERSION-linux_x64.tar.xz"
+          echo "$NIM_SHA256  $RUNNER_TEMP/nim.tar.xz" | sha256sum -c -
+          tar -xJf "$RUNNER_TEMP/nim.tar.xz" -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/nim-$NIM_VERSION/bin" >> "$GITHUB_PATH"
+      - name: Build libcrux
+        working-directory: zig
+        run: zig build
+      - name: Nim tests
+        working-directory: nim
+        run: nim c -r --hints:off tests/test_crux.nim
+      - name: Nim CLI
+        working-directory: nim
+        run: |
+          nim c --hints:off -o:crux_cli crux_cli.nim
+          ./crux_cli version
+          ./crux_cli emit-smt ../zig/examples/basics.crux
+          ./crux_cli abjad الله
