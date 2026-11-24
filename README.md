@@ -32,7 +32,7 @@ This repository holds the CRUX model in three forms, plus an Abjad library:
 - **Proof-carrying certificates.** Each verdict becomes a derivation plus a JSON certificate holding the SHA-256 of the SMT, Lean and CUDA artifacts.
 - **Finite-domain search.** Bounds become domains, the other atoms become suspended constraints, and first-fail search finds a model or proves none exists.
 - **Lean 4 library.** All fourteen CRUX modules are in Lean 4.19.0, with their identities stated as theorems.
-- **Abjad matrix.** Available as a Lean library, a Zig module, a `crux abjad` subcommand, C functions and Nim procs.
+- **Abjad matrix.** Available as a Zig module, a `crux abjad` subcommand, C functions and Nim procs.
 
 ## Quick start
 
