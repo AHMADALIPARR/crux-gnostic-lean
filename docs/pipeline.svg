@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="470" viewBox="0 0 980 470" font-family="Helvetica, Arial, sans-serif" font-size="13">
+  <title>CRUX compiler pipeline</title>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="980" height="470" fill="#ffffff"/>
+  <text x="490" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f172a">CRUX compiler pipeline (zig/src)</text>
+
+  <!-- front end -->
+  <g stroke="#334155" stroke-width="1.2">
+    <rect x="20" y="70" width="140" height="64" rx="8" fill="#f1f5f9"/>
+    <rect x="200" y="70" width="140" height="64" rx="8" fill="#dbeafe"/>
+    <rect x="380" y="70" width="140" height="64" rx="8" fill="#dbeafe"/>
+    <rect x="560" y="70" width="170" height="64" rx="8" fill="#e0e7ff"/>
+    <rect x="770" y="70" width="190" height="64" rx="8" fill="#e0e7ff"/>
+  </g>
+  <g text-anchor="middle" fill="#0f172a">
+    <text x="90" y="97" font-weight="bold">source .crux</text>
+    <text x="90" y="117" font-size="12">Russian syntax</text>
+    <text x="270" y="97" font-weight="bold">lexer.zig</text>
+    <text x="270" y="117" font-size="12">tokens, line:col</text>
+    <text x="450" y="97" font-weight="bold">parser.zig</text>
+    <text x="450" y="117" font-size="12">RussianForm items</text>
+    <text x="645" y="97" font-weight="bold">pipeline.zig</text>
+    <text x="645" y="117" font-size="12">lowerRussianForm</text>
+    <text x="865" y="97" font-weight="bold">ast.zig IR</text>
+    <text x="865" y="117" font-size="12">State, Formula, Backend</text>
+  </g>
+  <g stroke="#475569" stroke-width="1.5" marker-end="url(#a)" fill="none">
+    <line x1="160" y1="102" x2="198" y2="102"/>
+    <line x1="340" y1="102" x2="378" y2="102"/>
+    <line x1="520" y1="102" x2="558" y2="102"/>
+    <line x1="730" y1="102" x2="768" y2="102"/>
+  </g>
+
+  <!-- fan out to backends -->
+  <g stroke="#475569" stroke-width="1.5" fill="none">
+    <path d="M865 134 L865 160 L110 160"/>
+    <line x1="110" y1="160" x2="110" y2="188" marker-end="url(#a)"/>
+    <line x1="350" y1="160" x2="350" y2="188" marker-end="url(#a)"/>
+    <line x1="590" y1="160" x2="590" y2="188" marker-end="url(#a)"/>
+    <line x1="830" y1="160" x2="830" y2="188" marker-end="url(#a)"/>
+  </g>
+  <g stroke="#334155" stroke-width="1.2">
+    <rect x="20" y="190" width="180" height="74" rx="8" fill="#fef3c7"/>
+    <rect x="260" y="190" width="180" height="74" rx="8" fill="#dcfce7"/>
+    <rect x="500" y="190" width="180" height="74" rx="8" fill="#fce7f3"/>
+    <rect x="740" y="190" width="180" height="74" rx="8" fill="#ede9fe"/>
+  </g>
+  <g text-anchor="middle" fill="#0f172a">
+    <text x="110" y="216" font-weight="bold">z3.zig</text>
+    <text x="110" y="236" font-size="12">SMT-LIB 2, 32-bit BV</text>
+    <text x="110" y="253" font-size="12" fill="#475569">crux emit-smt</text>
+    <text x="350" y="216" font-weight="bold">lean.zig</text>
+    <text x="350" y="236" font-size="12">Lean 4 theorem file</text>
+    <text x="350" y="253" font-size="12" fill="#475569">crux emit-lean</text>
+    <text x="590" y="216" font-weight="bold">sas.zig</text>
+    <text x="590" y="236" font-size="12">interval fixpoint</text>
+    <text x="590" y="253" font-size="12" fill="#475569">crux emit-sas</text>
+    <text x="830" y="216" font-weight="bold">cuda.zig</text>
+    <text x="830" y="236" font-size="12">SAS analysis as CUDA C</text>
+    <text x="830" y="253" font-size="12" fill="#475569">crux emit-cuda</text>
+  </g>
+
+  <!-- converge on omega -->
+  <g stroke="#475569" stroke-width="1.5" fill="none">
+    <line x1="110" y1="264" x2="110" y2="290"/>
+    <line x1="350" y1="264" x2="350" y2="290"/>
+    <line x1="590" y1="264" x2="590" y2="290"/>
+    <path d="M110 290 L590 290"/>
+    <line x1="350" y1="290" x2="350" y2="318" marker-end="url(#a)"/>
+  </g>
+  <rect x="230" y="320" width="240" height="64" rx="8" fill="#fee2e2" stroke="#334155" stroke-width="1.2"/>
+  <text x="350" y="347" text-anchor="middle" font-weight="bold" fill="#0f172a">omega.zig</text>
+  <text x="350" y="367" text-anchor="middle" font-size="12" fill="#0f172a">Z3, then Lean, then SAS</text>
+  <text x="350" y="410" text-anchor="middle" font-size="12" fill="#475569">crux check / crux run</text>
+
+  <line x1="470" y1="352" x2="578" y2="352" stroke="#475569" stroke-width="1.5" marker-end="url(#a)"/>
+  <rect x="580" y="320" width="240" height="64" rx="8" fill="#e2e8f0" stroke="#334155" stroke-width="1.2"/>
+  <text x="700" y="347" text-anchor="middle" font-weight="bold" fill="#0f172a">pcc.zig</text>
+  <text x="700" y="367" text-anchor="middle" font-size="12" fill="#0f172a">derivation + certificate JSON</text>
+  <text x="700" y="410" text-anchor="middle" font-size="12" fill="#475569">crux cert</text>
+  <path d="M830 264 L830 300 L760 300 L760 318" stroke="#475569" stroke-width="1.5" fill="none" marker-end="url(#a)" stroke-dasharray="5 4"/>
+  <text x="840" y="296" font-size="11" fill="#475569">sha256 of artifacts</text>
+
+  <text x="490" y="450" text-anchor="middle" font-size="12" fill="#475569">Errors at any front-end stage are reported as FILE:line:col: error: message</text>
+</svg>

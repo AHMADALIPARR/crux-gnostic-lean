@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0 -->
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="600" viewBox="0 0 1000 600" font-family="Helvetica, Arial, sans-serif" font-size="12">
+  <title>Repository module map</title>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#475569"/>
+    </marker>
+  </defs>
+  <rect x="0" y="0" width="1000" height="600" fill="#ffffff"/>
+  <text x="500" y="30" text-anchor="middle" font-size="18" font-weight="bold" fill="#0f172a">Repository map: Lean libraries, Zig compiler, Nim bindings</text>
+
+  <!-- crux-lean column -->
+  <rect x="20" y="60" width="250" height="470" rx="10" fill="#f8fafc" stroke="#334155" stroke-width="1.2"/>
+  <text x="145" y="84" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">crux-lean/  (Lean 4.19.0)</text>
+  <g font-family="Menlo, Consolas, monospace" fill="#0f172a">
+    <text x="40" y="114">Crux/Ast.lean</text>
+    <text x="40" y="138">Crux/Russian.lean</text>
+    <text x="40" y="162">Crux/Z3Backend.lean</text>
+    <text x="40" y="186">Crux/LeanBackend.lean</text>
+    <text x="40" y="210">Crux/LeanMonadStack.lean</text>
+    <text x="40" y="234">Crux/TacticInfra.lean</text>
+    <text x="40" y="258">Crux/SasBackend.lean</text>
+    <text x="40" y="282">Crux/Omega.lean</text>
+    <text x="40" y="306">Crux/Pcc.lean</text>
+    <text x="40" y="330">Crux/Pipeline.lean</text>
+    <text x="40" y="354">Crux/Domain.lean</text>
+    <text x="40" y="378">Crux/Arithmetic.lean</text>
+    <text x="40" y="402">Crux/Search.lean</text>
+    <text x="40" y="426">Crux/Suspension.lean</text>
+    <text x="40" y="460" fill="#475569">Crux.lean  (imports all 14)</text>
+  </g>
+
+  <!-- gnostic column -->
+  <rect x="20" y="545" width="250" height="44" rx="10" fill="#fefce8" stroke="#334155" stroke-width="1.2"/>
+  <text x="145" y="563" text-anchor="middle" font-size="13" font-weight="bold" fill="#0f172a">gnostic-arabic-lean/</text>
+  <text x="145" y="580" text-anchor="middle" font-size="11" font-family="Menlo, Consolas, monospace" fill="#0f172a">GnosticArabic/AbjadMatrix.lean</text>
+
+  <!-- zig column -->
+  <rect x="360" y="60" width="300" height="529" rx="10" fill="#fff7ed" stroke="#334155" stroke-width="1.2"/>
+  <text x="510" y="84" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">zig/src/  (Zig 0.17.1)</text>
+  <g font-family="Menlo, Consolas, monospace" fill="#0f172a">
+    <text x="380" y="114">ast.zig</text>
+    <text x="380" y="138">lexer.zig + parser.zig</text>
+    <text x="380" y="162">z3.zig</text>
+    <text x="380" y="186">lean.zig</text>
+    <text x="380" y="210">monad_stack.zig</text>
+    <text x="380" y="234">monad_stack.zig (TacticState)</text>
+    <text x="380" y="258">sas.zig</text>
+    <text x="380" y="282">omega.zig</text>
+    <text x="380" y="306">pcc.zig</text>
+    <text x="380" y="330">pipeline.zig</text>
+    <text x="380" y="354">domain.zig</text>
+    <text x="380" y="378">arithmetic.zig</text>
+    <text x="380" y="402">search.zig</text>
+    <text x="380" y="426">suspension.zig</text>
+    <text x="380" y="460" fill="#9a3412">cuda.zig</text>
+    <text x="380" y="484" fill="#9a3412">main.zig  (crux CLI)</text>
+    <text x="380" y="508" fill="#9a3412">capi.zig + include/crux.h</text>
+    <text x="380" y="532" fill="#9a3412">root.zig, tests.zig</text>
+    <text x="380" y="567">abjad.zig</text>
+  </g>
+
+  <!-- counterpart arrows -->
+  <g stroke="#94a3b8" stroke-width="1" stroke-dasharray="4 3" fill="none">
+    <line x1="240" y1="110" x2="372" y2="110"/>
+    <line x1="240" y1="134" x2="372" y2="134"/>
+    <line x1="240" y1="158" x2="372" y2="158"/>
+    <line x1="240" y1="182" x2="372" y2="182"/>
+    <line x1="240" y1="206" x2="372" y2="206"/>
+    <line x1="240" y1="230" x2="372" y2="230"/>
+    <line x1="240" y1="254" x2="372" y2="254"/>
+    <line x1="240" y1="278" x2="372" y2="278"/>
+    <line x1="240" y1="302" x2="372" y2="302"/>
+    <line x1="240" y1="326" x2="372" y2="326"/>
+    <line x1="240" y1="350" x2="372" y2="350"/>
+    <line x1="240" y1="374" x2="372" y2="374"/>
+    <line x1="240" y1="398" x2="372" y2="398"/>
+    <line x1="240" y1="422" x2="372" y2="422"/>
+    <line x1="270" y1="563" x2="372" y2="563"/>
+  </g>
+  <text x="315" y="452" text-anchor="middle" font-size="10" fill="#475569">counterpart</text>
+  <text x="315" y="466" text-anchor="middle" font-size="10" fill="#475569">modules</text>
+
+  <!-- outputs and nim -->
+  <rect x="740" y="90" width="240" height="190" rx="10" fill="#f0fdf4" stroke="#334155" stroke-width="1.2"/>
+  <text x="860" y="114" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">zig build outputs</text>
+  <g font-family="Menlo, Consolas, monospace" fill="#0f172a">
+    <text x="758" y="146">zig-out/bin/crux</text>
+    <text x="758" y="176">zig-out/lib/libcrux.a</text>
+    <text x="758" y="206">zig-out/include/crux.h</text>
+  </g>
+  <text x="758" y="240" fill="#475569">emits .smt2  .lean  .cu</text>
+  <text x="758" y="260" fill="#475569">SAS reports, cert JSON</text>
+
+  <rect x="740" y="360" width="240" height="150" rx="10" fill="#eff6ff" stroke="#334155" stroke-width="1.2"/>
+  <text x="860" y="384" text-anchor="middle" font-size="14" font-weight="bold" fill="#0f172a">nim/  (Nim 2.4.2)</text>
+  <g font-family="Menlo, Consolas, monospace" fill="#0f172a">
+    <text x="758" y="416">crux.nim</text>
+    <text x="758" y="440">crux_cli.nim</text>
+    <text x="758" y="464">tests/test_crux.nim</text>
+    <text x="758" y="488">crux.nimble</text>
+  </g>
+
+  <g stroke="#475569" stroke-width="1.5" fill="none" marker-end="url(#a)">
+    <path d="M660 484 L700 484 L700 146 L738 146"/>
+    <path d="M660 508 L710 508 L710 176 L738 176"/>
+    <line x1="860" y1="280" x2="860" y2="358"/>
+  </g>
+  <text x="872" y="324" fill="#475569">links libcrux.a,</text>
+  <text x="872" y="340" fill="#475569">imports crux.h</text>
+</svg>
