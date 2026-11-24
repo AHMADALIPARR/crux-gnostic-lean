@@ -16,7 +16,7 @@ This repository holds the CRUX model in three forms, plus an Abjad library:
 - **`crux-lean/`**: the CRUX / SILA / OMEGA-SMASHER stack as a Lean 4 library.
 - **`zig/`**: a standalone CRUX compiler in Zig. It parses `.crux` files and emits SMT-LIB 2, Lean 4, SAS reports, CUDA C and certificates.
 - **`nim/`**: Nim bindings over `libcrux`, the compiler's C ABI.
-- **`gnostic-arabic-lean/`**: the Abjad matrix in Lean 4. It covers the twenty-eight Arabic letters and their values, the 3×3 Allah wafq, decoherence quadrants and the Al-Hamid matrix. `zig/src/abjad.zig` ports it to Zig.
+
 
 ![Repository map](docs/modules.svg)
 
