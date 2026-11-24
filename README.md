@@ -183,17 +183,6 @@ SAS reads the state bindings: in `S0[x := 2 + 3]`, x is the interval [5, 5]. The
 | `Crux/Search.lean` | Fuel-bounded constraint search. | `SearchStrategy`, `SearchResult`, `first_fail_select`, `search_vars`, `minimize_cost` |
 | `Crux/Suspension.lean` | Suspended constraints woken by watched variables, plus propagation to a fixpoint. | `SuspensionEntry`, `SuspensionStore`, `suspend`, `wake`, `propagate_store` |
 
-### gnostic-arabic-lean (Lean 4)
-
-`GnosticArabic.lean` imports `GnosticArabic/AbjadMatrix.lean`, which defines:
-- the letters and polarity: `ArabicLetter`, `abjad_value`, `Polarity`;
-- arithmetic on them: `digit_root`, `equilibrium_constant`;
-- the magic square: `Wafq` and `WAFQ_ALLAH_3X3`;
-- `DecoherenceQuadrant`, `Hieroglyph` and `decode_hieroglyph_program`;
-- `Pillar`, `AlHamidMatrix`, and the `kenoma_state` / `pleroma_state` threshold;
-- the named constants listed in the Abjad section.
-
-Its identities are theorems proved by `decide`: `test_al_hamid`, `test_allah_equilibrium`, `test_wafq_allah_rows_columns`, `test_wafq_allah_diagonals`, `test_decoherence_quadrants`, `test_exodus`, `test_al_hamid_matrix` and `test_pillar_constants`.
 
 ### zig (the compiler)
 
@@ -306,10 +295,7 @@ crux-lean/
   Crux/                     Ast, Russian, Z3Backend, LeanBackend, LeanMonadStack, TacticInfra,
                             SasBackend, Omega, Pcc, Pipeline, Domain, Arithmetic, Search, Suspension
   lakefile.lean, lean-toolchain, lake-manifest.json, README.md, STATUS.md
-gnostic-arabic-lean/
-  GnosticArabic.lean        root import
-  GnosticArabic/AbjadMatrix.lean
-  lakefile.lean, lean-toolchain, lake-manifest.json, README.md, STATUS.md
+
 zig/
   build.zig, build.zig.zon  crux executable, libcrux, tests
   src/                      compiler modules (see the module guide)
