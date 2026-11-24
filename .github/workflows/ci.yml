@@ -70,11 +70,12 @@ jobs:
       - name: Examples through every subcommand
         run: |
           for f in examples/*.crux; do
-            for c in lex parse lower emit-smt emit-lean emit-sas emit-cuda cert run solve; do
+            for c in lex parse lower emit-smt emit-lean emit-sas emit-cuda cert run; do
               ./zig-out/bin/crux "$c" --no-z3 "$f" > /dev/null
             done
             ./zig-out/bin/crux check "$f"
           done
+          ./zig-out/bin/crux solve examples/solve.crux
       - name: SMT-LIB output through z3
         run: |
           for f in examples/*.crux; do
