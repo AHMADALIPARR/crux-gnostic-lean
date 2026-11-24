@@ -36,7 +36,7 @@ jobs:
           curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
           echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
       - name: lake build
-        run: lake build +Crux.Arithmetic +Crux.Ast +Crux.Domain +Crux.LeanBackend +Crux.LeanMonadStack +Crux.Omega +Crux.Pcc +Crux.SasBackend +Crux.Search +Crux.Suspension +Crux.TacticInfra +Crux.Z3Backend
+        run: lake build +Crux.Arithmetic +Crux.Ast +Crux.Domain +Crux.LeanBackend +Crux.LeanMonadStack +Crux.Omega +Crux.Pcc +Crux.SasBackend +Crux.Search +Crux.Suspension +Crux.TacticInfra +Crux.Z3Backend +Crux.Russian_checked +Crux.Pipeline_checked +Crux.Russian_checked_props +Crux.Russian_checked_tests
 
   zig:
     name: CRUX compiler (Zig 0.17.1)
