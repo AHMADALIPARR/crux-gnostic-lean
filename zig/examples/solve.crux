@@ -1,0 +1,9 @@
+-- SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0
+-- Finite-domain problems for `crux solve`: bounds give each variable a
+-- domain, the other atoms become suspended constraints.
+
+theorem split_ten : 0 ≤ x ∧ x ≤ 9 ∧ 0 ≤ y ∧ y ≤ 9 ∧ x < y ∧ x + y = 10 ∧ x ≠ 1 ∧ x ≠ 2;
+
+theorem coins : 0 ≤ a ∧ a ≤ 20 ∧ 0 ≤ b ∧ b ≤ 20 ∧ 2 * a + 5 * b = 37 ∧ a > b;
+
+theorem impossible : 1 ≤ p ∧ p ≤ 3 ∧ 1 ≤ q ∧ q ≤ 3 ∧ p + q = 7

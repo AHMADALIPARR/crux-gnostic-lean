@@ -1,0 +1,11 @@
+-- SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0
+-- Formulas in recursive states: сила(S, P) holds P in state S.
+-- S[x := t] binds x in the state; the SAS backend tracks it as an interval.
+
+theorem bound_five : сила(S0[x := 2 + 3], x = 5);
+
+theorem counter : сила(S4[i := 0][j := 3 * 4], j = 12 ∧ i = 0);
+
+theorem wrong_value : сила(S1[x := 2 + 3], x = 6);
+
+theorem through_omega : омега(Kani, S2, x * 1 = x)

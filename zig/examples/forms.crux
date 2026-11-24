@@ -1,0 +1,15 @@
+-- SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0
+-- The twelve Russian forms of CRUX, one per item.
+
+равенство(a + b, b + a);
+импликация(x = 1, x > 0);
+конъюнкция(x = x, true);
+дизъюнкция(x ≤ 4, x > 4);
+отрицание(1 = 2);
+для_всех k : Int. k - k = 0;
+существует m : Int. m = 3;
+рекурсия X. X ∨ ¬ X;
+состояние S 7;
+сила(S3, y = y);
+омега(GHC, S, p + 0 = p);
+доказательство

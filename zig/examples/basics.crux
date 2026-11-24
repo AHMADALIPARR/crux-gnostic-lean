@@ -1,0 +1,12 @@
+-- SPDX-License-Identifier: AGPL-3.0-only OR LicenseRef-SnapKitty-Opaque-1.0
+-- CRUX basics: equalities, quantifiers and connectives in the Russian syntax.
+
+theorem add_comm_one : равенство(x + 1, 1 + x);
+
+theorem double : для_всех n : Int. n * 2 = n + n;
+
+theorem order : x < y ∧ y < z → x < z;
+
+theorem ground : 2 * 3 + 1 = 7;
+
+example : импликация(x = 3, x + 1 = 4)
